@@ -1,10 +1,10 @@
-package com.techworld.discovery;
+package com.techworld.apigateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DiscoveryServerApplicationTests {
+class ApiGatewayApplicationTest {
 
 	@Test
 	void contextLoads() {
