@@ -13,4 +13,6 @@ public interface FlightService {
 
     FlightResponse getFlightByNumber(String flightNumber);
 
+    public void reserveSeats(String flightNumber, int seats);
+
 }

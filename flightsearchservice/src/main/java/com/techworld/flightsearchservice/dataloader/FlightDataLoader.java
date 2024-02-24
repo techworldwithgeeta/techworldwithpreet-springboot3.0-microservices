@@ -2,10 +2,8 @@ package com.techworld.flightsearchservice.dataloader;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
 import com.techworld.flightsearchservice.entity.Flight;
 import com.techworld.flightsearchservice.repository.FlightSearchRepository;
 

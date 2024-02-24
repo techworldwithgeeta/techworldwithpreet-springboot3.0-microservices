@@ -13,6 +13,7 @@ import com.techworld.flightservice.model.FlightRequest;
 import com.techworld.flightservice.model.FlightResponse;
 import com.techworld.flightservice.repository.FlightRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -78,5 +79,26 @@ public class FlightServiceImpl implements FlightService {
         BeanUtils.copyProperties(flight, flightResponse);
         return flightResponse;
 
+    }
+
+    @Override
+    @Transactional
+    public void reserveSeats(String flightNumber, int seats) {
+        log.info("Reservee seats {} for flight Number: {}", seats, flightNumber);
+
+        Flight flight = flightRepository.findByFlightNumber(flightNumber)
+                .orElseThrow(
+                        () -> new FlightServiceCustomException("Flight with given id not found",
+                                "FLIGHT_NOT_FOUND"));
+
+        if (flight.getTotalSeats() < seats) {
+            throw new FlightServiceCustomException(
+                    "Flights does not have sufficient seats",
+                    "INSUFFICIENT_SEATS");
+        }
+
+        flight.setTotalSeats(flight.getTotalSeats() - seats);
+        flightRepository.save(flight);
+        log.info("Flight Seats details updated Successfully");
     }
 }
